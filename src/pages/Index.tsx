@@ -1,11 +1,12 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '@/components/Sidebar';
 import { useAuth } from '@/components/AuthProvider';
 
 const Index = () => {
-  const { user, userRole } = useAuth();
+  const { user, userRole: authRole } = useAuth();
+  const [userRole, setUserRole] = useState<'admin' | 'customer' | 'driver'>(authRole || 'customer');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,7 +15,14 @@ const Index = () => {
     }
   }, [user, navigate]);
 
-  if (!user || !userRole) {
+  // Set initial role from auth when it's available
+  useEffect(() => {
+    if (authRole) {
+      setUserRole(authRole);
+    }
+  }, [authRole]);
+
+  if (!user) {
     return null;
   }
 
