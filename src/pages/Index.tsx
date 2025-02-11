@@ -1,9 +1,22 @@
 
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '@/components/Sidebar';
+import { useAuth } from '@/components/AuthProvider';
 
 const Index = () => {
-  const [userRole, setUserRole] = useState<'admin' | 'customer' | 'driver'>('admin');
+  const { user, userRole } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/auth');
+    }
+  }, [user, navigate]);
+
+  if (!user || !userRole) {
+    return null;
+  }
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
