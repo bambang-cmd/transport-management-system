@@ -33,7 +33,7 @@ const Index = () => {
         <div className="glass-panel rounded-2xl p-8">
           <h1 className="text-4xl font-bold mb-8">Transport Management System</h1>
           <p className="text-lg text-gray-600 mb-8">
-            Selamat datang di sistem manajemen transportasi modern Anda
+            Selamat datang di sistem manajemen transportasi modern Anda. Silakan pilih role Anda di bawah ini.
           </p>
           
           {/* Role Selector - Temporary untuk demo */}
